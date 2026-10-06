@@ -1,0 +1,17 @@
+# Environment variables (local testing ke liye)
+.env
+
+# Python cache & build files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Zip files / IDE settings
+*.zip
+.vscode/
+.idea/
