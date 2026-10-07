@@ -2,7 +2,7 @@ name: Daily AI Brief
 
 on:
   schedule:
-    - cron: "30 2 * * *"   # 02:30 UTC = 08:00 IST (GitHub may delay runs by a few minutes)
+    - cron: "40 3 * * *"   # 02:30 UTC = 08:00 IST (GitHub may delay runs by a few minutes)
   workflow_dispatch:        # lets you run it manually from the Actions tab
 
 permissions:
@@ -29,10 +29,10 @@ jobs:
 
       - name: Build and send the brief
         env:
-          GEMINI_API_KEY: AQ.Ab8RN6LKjtR6YusSYTKUNERADTt6i8jUfXuGg9mx2cUDMDgAYg
-          TELEGRAM_BOT_TOKEN: 8706867030:AAH9hyOpqziYzXZvLxBj_RnfvBbzIw29Tes
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
-          TELEGRAM_CHAT_ID: 6713145749
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python bot.py
 
