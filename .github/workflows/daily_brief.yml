@@ -2,11 +2,11 @@ name: Daily AI Brief
 
 on:
   schedule:
-    - cron: "40 3 * * *"   # 02:30 UTC = 08:00 IST (GitHub may delay runs by a few minutes)
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+    - cron: "35 4 * * *"   # 03:40 UTC = 09:10 IST
+  workflow_dispatch:
 
 permissions:
-  contents: write           # needed to commit seen.json back to the repo
+  contents: write
 
 concurrency:
   group: daily-ai-brief
@@ -16,10 +16,11 @@ jobs:
   brief:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
           cache: pip
@@ -31,7 +32,6 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python bot.py
